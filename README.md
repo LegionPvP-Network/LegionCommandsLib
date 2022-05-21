@@ -2,7 +2,7 @@
 Custom Command Library to easily handle Arguments/SubCommands.
 
 **INFORMATION:**
-This library allows you to easily handle Arguments/SUbCommands,
+This library allows you to easily handle Arguments/SubCommands,
 BaseCommand automaticly does checks on the CommandSender, such as:
  - Permissions check (for subcommand and normal command)
  - Sends a message to the sender if there are arguments registered but no given arguments by the sender.
