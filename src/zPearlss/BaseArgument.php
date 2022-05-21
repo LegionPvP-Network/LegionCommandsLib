@@ -7,17 +7,18 @@ use pocketmine\command\CommandSender;
 abstract class BaseArgument
 {
 
+    public string $name = "";
     private bool $allowConsole;
     private string $permission = "";
 
-    public function __construct(bool $allowConsole, string $permission = "")
+    public function __construct(string $name, bool $allowConsole, string $permission = "")
     {
+        $this->name = $name;
         $this->allowConsole = $allowConsole;
         $this->permission = "";
     }
 
-    abstract public function execute(CommandSender $sender, array $args);
-
+    abstract public function execute(CommandSender $sender, array $args): bool;
 
     public function canConsoleExecute(): bool
     {

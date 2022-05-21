@@ -8,7 +8,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\console\ConsoleCommandSender;
 use pocketmine\utils\TextFormat;
 
-class BaseCommand extends Command
+abstract class BaseCommand extends Command
 {
     private array $arguments = [];
 
@@ -17,13 +17,22 @@ class BaseCommand extends Command
         parent::__construct($name, $description, $usage, $aliases);
     }
 
-    private function registerArgument(BaseArgument $arg, string $name): void
+    public function registerArgument(BaseArgument $argument): void
     {
-        $this->arguments[$name] = $arg;
+        $this->arguments[$argument->name] = $argument;
     }
 
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    final public function execute(CommandSender $sender, string $commandLabel, array $args): bool
     {
+        if(!$this->testPermission($sender)){
+            return false;
+        }
+
+        if(empty($this->arguments)){
+            $this->onExecute($sender, $args);
+            return true;
+        }
+
         if (!isset($args[0])) {
             $sender->sendMessage(TextFormat::RED . "Please specify an argument.");
             return false;
@@ -35,20 +44,22 @@ class BaseCommand extends Command
             return false;
         }
 
-        $command = $this->arguments[$argument];
+        $subcommand = $this->arguments[$argument];
         array_shift($args);
 
-        if($sender instanceof ConsoleCommandSender && !$command->canConsoleExecute()){
+        if($sender instanceof ConsoleCommandSender && !$subcommand->canConsoleExecute()){
             $sender->sendMessage(TextFormat::RED . "This command can only be executed in-game!");
             return false;
         }
 
-        if($command->hasPermission() && !$sender->hasPermission($command->getPermission())){
+        if($subcommand->hasPermission() && !$sender->hasPermission($subcommand->getPermission())){
             $sender->sendMessage($sender->getServer()->getLanguage()->translateString(TextFormat::RED . "%commands.generic.permission"));
             return false;
         }
 
-        $command->execute($sender, $args);
+        $subcommand->execute($sender, $args);
         return true;
     }
+
+    abstract public function onExecute(CommandSender $sender, array $arguments): bool;
 }
