@@ -1,8 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-namespace CommandLib;
+namespace zPearlss;
 
 use pocketmine\plugin\Plugin;
 use pocketmine\command\Command;
