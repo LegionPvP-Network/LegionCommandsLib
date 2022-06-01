@@ -13,6 +13,7 @@ class NoArgumentsExampleCommand extends BaseCommand
     
     public function __construct(ExamplePlugin $plugin)
     {
+        //format: $plugin, $name, $description, $usage, $aliases
         parent::__construct(HCF::getInstance(), "example1", "A command example with no arguments");
     }
 
