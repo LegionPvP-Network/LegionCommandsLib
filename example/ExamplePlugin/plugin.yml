@@ -1,4 +1,4 @@
-name: SpawnPlugin
+name: ExamplePoop
 authors: [zPearlss]
 description: "Plugin Example using LCommandLib"
 main: zPearls\example\ExamplePlugin
