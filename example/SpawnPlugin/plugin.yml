@@ -1,7 +1,7 @@
 name: SpawnPlugin
 authors: [zPearlss]
 description: "Plugin Example using LCommandLib"
-main: zPearls\example
+main: zPearls\example\ExamplePlugin
 version: 1.0.0
 api: [4.0.0]
 load: STARTUP
