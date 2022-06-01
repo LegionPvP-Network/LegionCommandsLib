@@ -14,6 +14,7 @@ class ArgumentExampleCommand extends BaseCommand
     
     public function __construct(ExamplePlugin $plugin)
     {
+        //format: $plugin, $name, $description, $usage, $aliases
         parent::__construct(HCF::getInstance(), "example2", "A command example with 2 arguments");
         
         //to provide a permission for this command do: 
