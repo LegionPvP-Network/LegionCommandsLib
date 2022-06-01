@@ -10,7 +10,7 @@ class ExamplePlugin extends PluginBase
     
     public function onEnable(): void
     {
-        $this->getServer()->getCommandMap()->register('/logs', new NoArgumentsExampleCommand());
+        $this->getServer()->getCommandMap()->register('/example1', new NoArgumentsExampleCommand($this)); //$this === Plugin === PluginBase//
     }
     
     public function onDisable(): void
